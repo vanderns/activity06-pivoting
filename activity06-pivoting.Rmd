@@ -28,7 +28,7 @@ The `by_speaker` dataset summarizes the total number of words spoken by main cha
 by_speaker <- read_csv(here::here("data","by_speaker.csv"))
 ```
 
-In the `load_-_data` chunk, notice that I am using a new function: the `here` function from `{here}` (typed as `here::here` or in `<package>::<function>` format).
+In the `load_data` chunk, notice that I am using a new function: the `here` function from `{here}` (typed as `here::here` or in `<package>::<function>` format).
 This function is a another great tool to use for sharing projects with others when their file structure might be different than yours.
 Read Jenny Bryan's [Ode to the here package](https://github.com/jennybc/here_here) and/or read more about `{here}`... [here](https://here.r-lib.org/articles/here.html).
 Also, Martin Chan provides a guide of [RStudio Projects and Working Directories](https://martinctc.github.io/blog/rstudio-projects-and-working-directories-a-beginner's-guide/) and Jenny Richmond gives an overview on [How to use the `here` package](http://jenrichmond.rbind.io/post/how-to-use-the-here-package/).
@@ -41,7 +41,6 @@ Type `here::here()` in your **Console** to verify that it is recognizing your cu
 ![Illustration by Allison Horst](https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/here.png)
 
 Art by [@allison_horst](https://twitter.com/allison_horst)
-
 
 Now, why is `by_speaker` untidy data?
 How would this data be organized if it were tidy?
@@ -102,7 +101,8 @@ Inspect that this file was created by looking in the `data` project folder in th
 You should see three files: `by_speaker.csv`, `by_season.csv`, and `friends_tidy.csv`.
 Simply verifying that it exists is sufficient.
 
-![](README-img/noun_pause.png) **Planned Pause Point**: If you have any questions, contact your instructor. Otherwise feel free to continue on.
+
+<img src="README-img/noun_pause.png" alt="pause" width = "20"/> <b>Planned Pause Point</b>: If you feel that you have a good understanding of these commands, feel free to skip to the **Preparing tables** section. The remainder of this activity will help to expand these commands.
 
 ### Try it another way
 
@@ -125,21 +125,21 @@ Now,
 
 
 
-#### Total words spoken
+#### Challenge: Total words spoken
 
-Using `by_season` and your skills from past activities, write the code that computes the total number of words spoken by each season and the total words spoken across the series (challenge, can you display this information in one table?).
-Name this code chunk `season_summary`.
+If you were to use `by_season` and your skills from past activities, describe (or code) how you would obtain the total number of words spoken by each season and the total words spoken across the series (challenge, can you display this information in one table?).
 
-
-
-Using `by_speaker` and your skills from past activities, write the code that computes the total number of words spoken by each season and the total words spoken across the series (challenge, can you display this information in one table?).
-Name this code chunk `speaker_summary`.
+**Response**:
 
 
+If you were to use `by_speaker` and your skills from past activities, describe (or code) how you would obtain the total number of words spoken by each season and the total words spoken across the series (challenge, can you display this information in one table?).
 
-Using the `friends_tidy` object and your skills from past activities, write the code that computes the total number of words spoken by each season and the total words spoken across the series (challenge, can you display this information in one table?).
-Call this code chunk `tidy_summary`
+**Response**:
 
+
+If you were to use `friends_tidy` object and your skills from past activities, describe (or code) how you would obtain the total number of words spoken by each season and the total words spoken across the series (challenge, can you display this information in one table?).
+
+**Response**:
 
 
 How does the code for `friends_tidy` compare to the two `by_` code?
@@ -151,7 +151,6 @@ Which is easier to read?
 
 
 
-![](README-img/noun_pause.png) **Planned Pause Point**: If you have any questions, contact your instructor. Otherwise feel free to continue on.
 
 #### Preparing tables
 
@@ -179,7 +178,7 @@ Call this code chunk `speaker_wide`.
 
 
 
-![](README-img/noun_pause.png) **Final Planned Pause Point**: If you have any questions, contact your instructor. Otherwise feel free to continue on.
+<img src="README-img/noun_pause.png" alt="pause" width = "20"/> <b>Planned Pause Point</b>: If you feel that you have a good understanding of these commands, feel free to start working on your project. The remainder of this activity will help to expand these commands.
 
 ### Dressing up tables
 
