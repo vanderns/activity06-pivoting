@@ -1,6 +1,6 @@
 ---
 title: "Activity 6"
-author: "Name"
+author: "Nathan Vandermeer"
 output: github_document
 ---
 
@@ -26,6 +26,7 @@ The `by_speaker` dataset summarizes the total number of words spoken by main cha
 
 ```{r load_data, message=FALSE}
 by_speaker <- read_csv(here::here("data","by_speaker.csv"))
+by_speaker
 ```
 
 In the `load_data` chunk, notice that I am using a new function: the `here` function from `{here}` (typed as `here::here` or in `<package>::<function>` format).
@@ -46,7 +47,7 @@ Now, why is `by_speaker` untidy data?
 How would this data be organized if it were tidy?
 Do not use any of your new `{tidyr}` skills yet, only describe it.
 
-**Response**: 
+**Response**: Having the speakers as the columns and the seasons as the rows could be more appealing than vice versa. It will also make it potentially easier to work with to look at speakers instead of seasons.
 
 
 ![](README-img/noun_pause.png) **Planned Pause Point**: If you have any questions, contact your instructor. Otherwise feel free to continue on.
@@ -77,11 +78,16 @@ Similarly with directing the values to a new `Words` column.
 
 There are a number of helper functions to help with selecting columns.
 
-1. Try reproducing the pivoted data in the `pivot_season_longer` code chunck using either the `contains` or `starts_with` helper functions from `{tidyselect}` (this is loaded with the `{tidyverse}` by default).
+1. Try reproducing the pivoted data in the `pivot_season_longer` code chunk using either the `contains` or `starts_with` helper functions from `{tidyselect}` (this is loaded with the `{tidyverse}` by default).
 Remember that you can view the help documentation by using the `?` method in your **Console**.
 2. Assign your reformatted dataset to `friends_tidy`, and 
 3. Name your code chunk either `pivot_contains` or `pivot_ends` depending on which helper function you used.
 
+```{r pivot_contains}
+friends_tidy2 <- by_speaker %>% 
+  select(contains("spe"))
+friends_tidy2
+```
 
 
 
@@ -94,6 +100,9 @@ We can do this by writing it to a file within our directory.
 2. Call the file that is being created "`friends_tidy.csv`".
 3. Name your code chunk `writing_file`
 
+```{r writing_file}
+write_csv(friends_tidy,here::here('data','friends_tidy.csv'))
+```
 
 
 
@@ -113,7 +122,10 @@ This is the same information that we were just worked with, but structured in a 
 2. Assign this data file into meaningful objects.
 3. Name this code chunk `read_season_file`.
 
-
+```{r read_season_file, message=FALSE}
+by_season <- read_csv(here::here("data","by_season.csv"))
+by_season
+```
 
 
 Now, 
@@ -122,6 +134,15 @@ Now,
 2. Assign it to an object called `speaker_tidy`, and
 3. Name the code chunk `pivot_speaker`.
 
+```{r pivot_speaker}
+speaker_tidy <- by_season %>% 
+    pivot_longer(
+    cols = 'Chandler':'Ross',
+    names_to = "Speaker",
+    values_to = "Words"
+    )
+speaker_tidy
+```
 
 
 
@@ -131,23 +152,38 @@ If you were to use `by_season` and your skills from past activities, describe (o
 
 **Response**:
 
+```{r}
+by_season %>% 
+  mutate(Total=Chandler+Joey+Monica+Phoebe+Rachel+Ross,GrandTotal=sum(Total))
+```
 
 If you were to use `by_speaker` and your skills from past activities, describe (or code) how you would obtain the total number of words spoken by each season and the total words spoken across the series (challenge, can you display this information in one table?).
 
 **Response**:
 
+```{r}
+by_speaker %>% 
+  mutate(s1Total=sum(`Season 1`)) %>% 
+  select(s1Total)
+```
 
 If you were to use `friends_tidy` object and your skills from past activities, describe (or code) how you would obtain the total number of words spoken by each season and the total words spoken across the series (challenge, can you display this information in one table?).
 
 **Response**:
 
+```{r}
+friends_tidy %>% 
+  mutate(GrandTotal=sum(Words)) %>% 
+  filter(Season=="Season 1") %>% 
+  mutate(s1Total=sum(Words))
+```
 
 How does the code for `friends_tidy` compare to the two `by_` code?
 Reflect on the process of writing this code and on the code itself.
 Which is easier to write?
 Which is easier to read?
 
-**Response**:
+**Response**: Working with friends_tidy was a lot easier to think about.
 
 
 
@@ -175,8 +211,10 @@ friends_tidy %>%
 Write the code to take the tidy dataset and create one variable for each *speaker*.
 Call this code chunk `speaker_wide`.
 
-
-
+```{r speaker_wide}
+friends_tidy %>% 
+  pivot_wider(names_from = speaker, values_from = Words)
+```
 
 <img src="README-img/noun_pause.png" alt="pause" width = "20"/> <b>Planned Pause Point</b>: If you feel that you have a good understanding of these commands, feel free to start working on your project. The remainder of this activity will help to expand these commands.
 
